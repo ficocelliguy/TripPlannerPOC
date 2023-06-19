@@ -1,46 +1,42 @@
-const { prisma } = require ("../data/database");
+import { prisma } from '../data/database.js'
 
-const resolvers = {
-    Data: {
-        id: (parent, args, context, info) => parent.id,
-        name: (parent) => parent.name,
+export const resolvers = {
+  Data: {
+    id: (parent, args, context, info) => parent.id,
+    name: (parent) => parent.name
+  },
+
+  Query: {
+    allData: (parent, args) => {
+      return prisma.data.findMany({
+        take: 50
+      })
     },
-
-    Query: {
-        allData: (parent, args) => {
-            return prisma.data.findMany({
-                take: 50
-            });
-        },
-        data: (parent, args) => {
-            return prisma.data.findFirst({
-                where: {id: +args.id}
-            })
-        }
-    },
-
-    Mutation: {
-        registerData: (parent, args) => {
-            return prisma.data.create({
-                data: {
-                    name: args.name
-                }
-            })
-        },
-        updateData: (parent, args) => {
-           return prisma.data.update({
-               where: {
-                   id: +args.id
-               },
-               data: {
-                   name: args.name
-               }
-           });
-        },
+    data: (parent, args) => {
+      return prisma.data.findFirst({
+        where: { id: +args.id }
+      })
     }
+  },
 
-}
+  Mutation: {
+    registerData: (parent, args) => {
+      return prisma.data.create({
+        data: {
+          name: args.name
+        }
+      })
+    },
+    updateData: (parent, args) => {
+      return prisma.data.update({
+        where: {
+          id: +args.id
+        },
+        data: {
+          name: args.name
+        }
+      })
+    }
+  }
 
-module.exports = {
-    resolvers,
 }

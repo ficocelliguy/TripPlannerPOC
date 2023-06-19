@@ -1,6 +1,6 @@
-const { gql } = require('apollo-server')
+import { gql } from 'apollo-server'
 
-const typeDefs = gql`
+export const typeDefs = gql`
     type Data {
       id: ID!
       name: String!   
@@ -16,7 +16,3 @@ const typeDefs = gql`
       updateData(id: ID! name: String!): Data!
     }
 `
-
-module.exports = {
-  typeDefs
-}
