@@ -1,4 +1,4 @@
-// Initial data setup
+// Initial data setup, import instead of database.js
 // Once populated, migrate data to prisma
 // via `npx prisma migrate dev --name "init"`
 
