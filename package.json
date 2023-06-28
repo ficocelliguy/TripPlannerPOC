@@ -13,7 +13,8 @@
     "lint": "npm run lint-client && npm run lint-server",
     "lint-client": "eslint ./src/client --ext .js,.ts,.vue --fix",
     "lint-server": "eslint ./src/server --ext .js,.ts --fix  --parser-options project:'./src/server/tsconfig.json'",
-    "start": "npm run build-server && node dist/server/index.js",
+    "start-frontend": "vite",
+    "start-backend": "npm run build-server && node dist/server/index.js",
     "start-db": "docker-compose up -d",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
