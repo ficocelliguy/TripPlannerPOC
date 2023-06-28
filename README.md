@@ -1,15 +1,5 @@
 # Full Stack Shell
 
-- [TypeScript](https://www.typescriptlang.org/)
-- [Node](https://nodejs.org/en/)
-- [Express](https://expressjs.com/)
-- [Vue 3](https://vuejs.org/)
-- [Vite](https://vitejs.dev/)
-
-- [ESLint](https://eslint.org/)
-- [Prettier](https://prettier.io/)
-- [Jest](https://jestjs.io/)
-
 
 ## Getting Started
 
@@ -54,3 +44,17 @@ To start the client run
 npm run start-frontend
 ```
 You can visit the client locally at [http://127.0.0.1:5173/](http://127.0.0.1:5173/)
+
+
+
+
+Tools used in this stack:
+- [TypeScript](https://www.typescriptlang.org/)
+- [Node](https://nodejs.org/en/)
+- [Express](https://expressjs.com/)
+- [Vue 3](https://vuejs.org/)
+- [Vite](https://vitejs.dev/)
+
+- [ESLint](https://eslint.org/)
+- [Prettier](https://prettier.io/)
+- [Jest](https://jestjs.io/)
