@@ -110,9 +110,7 @@
   "files": ["../@types/graphql.d.ts"],
   "include": [
     "*.ts",
-    "*.tsx",
-    "*.graphql",
-    "../@types"
+    "**/*.ts"
   ],
   "exclude": [
     "node_modules",
