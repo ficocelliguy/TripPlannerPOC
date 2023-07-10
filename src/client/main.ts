@@ -1,5 +1,6 @@
 import { createApp } from "vue";
 import App from "./components/App.vue";
+import "./styles/main.css";
 
 const vm = createApp(App);
 
