@@ -2,24 +2,23 @@
   "name": "fullstackshell",
   "version": "1.0.0",
   "description": "",
-  "main": "src/client/main.ts",
-  "type": "module",
+  "author": "",
   "scripts": {
-    "dev": "vite",
     "build": "npm run build-client && npm run build-server",
+    "test:unit": "vue-cli-service test:unit",
+    "lint": "npm run lint-client && npm run lint-server",
     "build-client": "tsc && vite build",
     "build-server": "tsc --project ./src/server/tsconfig.json",
-    "preview": "vite preview",
-    "lint": "npm run lint-client && npm run lint-server",
+    "dev": "vite",
     "lint-client": "eslint ./src/client --ext .js,.ts,.vue --fix",
     "lint-server": "eslint ./src/server --ext .js,.ts --fix  --parser-options project:'./src/server/tsconfig.json'",
-    "start-frontend": "vite",
+    "preview": "vite preview",
     "start-backend": "npm run build-server && node dist/server/index.js",
     "start-db": "docker-compose up -d",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start-frontend": "vite",
+    "test": "npm run test:unit"
   },
-  "author": "",
-  "license": "ISC",
+  "main": "src/client/main.ts",
   "dependencies": {
     "@prisma/client": "^4.15.0",
     "apollo-server": "^3.12.0",
@@ -28,24 +27,33 @@
     "vue-router": "^4.2.2"
   },
   "devDependencies": {
+    "@types/jest": "^27.0.3",
     "@typescript-eslint/eslint-plugin": "^5.60.1",
     "@typescript-eslint/parser": "^5.60.1",
     "@vitejs/plugin-vue": "^4.2.3",
+    "@vue/cli-plugin-unit-jest": "~5.0.0",
     "@vue/eslint-config-prettier": "^6.0.0",
     "@vue/eslint-config-typescript": "^11.0.3",
+    "@vue/test-utils": "^2.4.0",
+    "@vue/vue3-jest": "^27.0.0-alpha.1",
     "autoprefixer": "^10.4.14",
+    "babel-jest": "^27.0.6",
     "eslint": "^8.41.0",
     "eslint-config-standard-with-typescript": "^35.0.0",
     "eslint-plugin-vue": "^9.14.1",
+    "jest": "^27.0.5",
     "postcss": "^8.4.25",
     "prettier": "^2.8.8",
     "prisma": "^4.15.0",
     "tailwindcss": "^3.3.2",
-    "typescript": "5.0.4",
+    "ts-jest": "^27.1.5",
+    "typescript": "4.9.4",
     "vite": "^4.3.9",
     "vite-plugin-graphql-loader": "^2.0.0"
   },
+  "license": "ISC",
   "prisma": {
     "schema": "./src/server/prisma/schema.prisma"
-  }
+  },
+  "type": "module"
 }

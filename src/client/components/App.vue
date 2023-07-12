@@ -1,7 +1,5 @@
 <template>
-  <h1 class="text-3xl font-bold underline">
-    Hello world!
-  </h1>
+  <h1 class="text-3xl font-bold underline">Hello world!</h1>
   <div>{{ dataString }}</div>
 </template>
 
@@ -30,11 +28,11 @@ export default {
     })
       .then(async (res) => await res.json())
       .then((res) => {
-        console.log(res.data);
+        console.log(`Fetched data: ${res.data}`);
         this.dataString = JSON.stringify(res.data);
       })
       .catch((e) => {
-        console.error(e);
+        console.error(`Error fetching data: ${e}`);
       });
   },
 };
