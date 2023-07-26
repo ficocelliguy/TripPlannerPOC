@@ -1,10 +1,19 @@
 <template>
-  <h1 class="text-3xl font-bold underline">Hello world!</h1>
-  <div>{{ dataString }}</div>
+  <div
+    class="bg-gradient-to-tr from-slate-900 to-slate-600 h-screen text-white"
+  >
+    <HeaderBar></HeaderBar>
+    <h1 class="text-3xl font-bold underline">Hello world!</h1>
+    <div>{{ dataString }}</div>
+  </div>
 </template>
 
 <script>
+import HeaderBar from "../components/HeaderBar.vue";
 export default {
+  components: {
+    HeaderBar,
+  },
   data() {
     return {
       dataString: "",
