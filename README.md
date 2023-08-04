@@ -18,7 +18,7 @@ For Windows use [this guide to set up nvm-windows.](https://learn.microsoft.com/
 Once NVM is installed, navigate to the project's root directory in the terminal (or Git Bash) and run:
 ```
 nvm install
-nvm use
+nvm use 16
 ```
 
 Now install all of the project's dependencies via NPM:
