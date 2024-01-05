@@ -54,6 +54,8 @@ Tools used in this stack:
 - [Express](https://expressjs.com/)
 - [Vue 3](https://vuejs.org/)
 - [Vite](https://vitejs.dev/)
+- [GraphQL](https://www.apollographql.com/tutorials/lift-off-part1)
+- [Prisma](https://www.prisma.io/docs)
 
 - [ESLint](https://eslint.org/)
 - [Prettier](https://prettier.io/)
