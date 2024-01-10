@@ -9,10 +9,10 @@
   </div>
   <NavMenu :open="navMenuOpen" />
   <div
-      data-test-id="menuMask"
-      v-if="navMenuOpen"
-      @click="closeNavMenu"
-      class="h-screen w-screen fixed opacity-0"
+    v-if="navMenuOpen"
+    data-test-id="menuMask"
+    class="h-screen w-screen fixed opacity-0"
+    @click="closeNavMenu"
   ></div>
 </template>
 
@@ -28,6 +28,13 @@ export default {
       navMenuOpen: false,
     };
   },
+  watch: {
+    $route: function (to, from) {
+      if (to !== from) {
+        this.closeNavMenu();
+      }
+    },
+  },
   methods: {
     toggleNavMenu() {
       this.navMenuOpen = !this.navMenuOpen;
@@ -36,13 +43,6 @@ export default {
     closeNavMenu() {
       this.navMenuOpen = false;
     },
-  },
-  watch:{
-    $route: function (to, from) {
-      if (to !== from){
-        this.closeNavMenu();
-      }
-    }
   },
 };
 </script>

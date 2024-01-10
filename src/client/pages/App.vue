@@ -1,10 +1,10 @@
 <template>
   <div
-      class="bg-gradient-to-tr from-slate-900 to-slate-600 h-screen text-white"
-      @click="closeNav"
+    class="bg-gradient-to-tr from-slate-900 to-slate-600 h-screen text-white"
+    @click="closeNav"
   >
     <HeaderBar></HeaderBar>
-    <div >
+    <div>
       <RouterView />
     </div>
   </div>
@@ -23,6 +23,6 @@ export default {
   },
   mounted() {
     console.log(this.$route);
-  }
+  },
 };
 </script>

@@ -7,19 +7,14 @@
     >
       <h1 class="">Nav Menu</h1>
       <div>
-        <RouterLink
-          class="button"
-          :to="{name: 'home'}"
-        >Home</RouterLink>
+        <RouterLink class="button" :to="{ name: 'home' }">Home</RouterLink>
       </div>
       <div>
-        <RouterLink
-          class="button"
-          :to="{name: 'about'}"
-        >About This App</RouterLink>
+        <RouterLink class="button" :to="{ name: 'about' }"
+          >About This App</RouterLink
+        >
       </div>
     </div>
-
   </div>
 </template>
 
