@@ -7,7 +7,19 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Data {
-  id   Int    @id @default(autoincrement())
-  name String
+model point {
+  id       Int        @id @unique @default(autoincrement())
+  lat      String
+  lng      String
+  Location location[]
+}
+
+model location {
+  id          Int    @id @unique @default(autoincrement())
+  name        String
+  description String
+  url         String
+  image       String
+  pointId     Int
+  point       point  @relation(fields: [pointId], references: [id])
 }

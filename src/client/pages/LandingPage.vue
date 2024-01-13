@@ -5,27 +5,40 @@
 </template>
 
 <script>
-import L from "leaflet";
 import "leaflet/dist/leaflet.css";
+import { APOLLO_URL } from "../config/config";
+import { mountMap } from "../util/map";
 
 export default {
   data() {
     return {
       dataString: "",
+      map: "",
     };
   },
   mounted() {
-    const dbUri = "http://localhost:9090";
-
-    fetch(dbUri, {
+    fetch(APOLLO_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         query: `
           query {
-            allData {
-              name
+            allPoints {
               id
+              lat
+              lng
+            }
+            allLocations {
+              id
+              point {
+                id
+                lat
+                lng
+              }
+              name
+              description
+              url
+              image
             }
           }`,
       }),
@@ -39,22 +52,7 @@ export default {
         console.error(`Error fetching data: ${e}`);
       });
 
-    const map = L.map("map", {
-      center: L.latLng(49.2125578, 16.62662018),
-      zoom: 14,
-    });
-
-    const Thunderforest_OpenCycleMap = L.tileLayer(
-      "https://{s}.tile.thunderforest.com/cycle/{z}/{x}/{y}.png?apikey={apikey}",
-      {
-        attribution:
-          '&copy; <a href="https://www.thunderforest.com/">Thunderforest</a>, &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-        apikey: "361a2d42eca84d66a880ba272a30e5bf",
-        maxZoom: 22,
-      }
-    );
-
-    Thunderforest_OpenCycleMap.addTo(map);
+    this.map = mountMap();
   },
 };
 </script>
