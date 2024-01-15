@@ -8,7 +8,7 @@ export const typeDefs = gql`
   }
   type Location {
     id: ID!
-    pointId: String!
+    point: Point!
     name: String
     description: String
     url: String

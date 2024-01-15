@@ -6,8 +6,8 @@
 
 <script>
 import "leaflet/dist/leaflet.css";
-import { APOLLO_URL } from "../config/config";
 import { mountMap } from "../util/map";
+import { getAllLocations } from "../util/waypointData.js";
 
 export default {
   data() {
@@ -16,41 +16,8 @@ export default {
       map: "",
     };
   },
-  mounted() {
-    fetch(APOLLO_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        query: `
-          query {
-            allPoints {
-              id
-              lat
-              lng
-            }
-            allLocations {
-              id
-              point {
-                id
-                lat
-                lng
-              }
-              name
-              description
-              url
-              image
-            }
-          }`,
-      }),
-    })
-      .then(async (res) => await res.json())
-      .then((res) => {
-        console.log(`Fetched data: ${res.data}`);
-        this.dataString = JSON.stringify(res.data);
-      })
-      .catch((e) => {
-        console.error(`Error fetching data: ${e}`);
-      });
+  async mounted() {
+    this.dataString = await getAllLocations();
 
     this.map = mountMap();
   },

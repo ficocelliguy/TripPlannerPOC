@@ -14,8 +14,11 @@
     "lint-server": "eslint ./src/server --ext .js,.ts --fix  --parser-options project:'./src/server/tsconfig.json'",
     "preview": "vite preview",
     "start-backend": "npm run build-server && node dist/server/index.js",
+    "serve": "npm run start-backend",
     "start-db": "docker-compose up -d",
+    "db": "npm run start-db",
     "start-frontend": "vite",
+    "start": "npm run start-frontend",
     "test": "npm run test:unit",
     "prisma-update-db": "npx prisma migrate dev && prisma db pull && prisma generate"
   },

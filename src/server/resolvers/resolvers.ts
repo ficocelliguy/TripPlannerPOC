@@ -9,7 +9,7 @@ export const resolvers = {
 
   Location: {
     id: (parent: any): string => parent.id,
-    pointId: (parent: any): string => parent.pointId,
+    point: (parent: any): string => parent.point,
     name: (parent: any): string => parent.name,
     description: (parent: any): string => parent.description,
     url: (parent: any): string => parent.url,
@@ -19,7 +19,7 @@ export const resolvers = {
   Query: {
     allPoints: async () => {
       return prisma.point.findMany({
-        take: 50,
+        take: 200,
       });
     },
     point: async (parent: any, args: any) => {
@@ -27,10 +27,20 @@ export const resolvers = {
         where: { id: +args.id },
       });
     },
+    /*
+     * Look up and map the point data onto the location response, instead of only returning the point id
+     */
     allLocations: async () => {
-      return prisma.location.findMany({
-        take: 50,
+      const locations = await prisma.location.findMany({
+        take: 200,
       });
+      const points = await prisma.point.findMany({
+        take: 200,
+      });
+      return locations.map(loc => ({
+          ...loc,
+          point: points.find(p => p.id === loc.pointId),
+        }));
     },
     location: async (parent: any, args: any) => {
       const location = await prisma.location.findFirst({
@@ -77,7 +87,7 @@ export const resolvers = {
         id: string | number;
       }
     ) => {
-      return prisma.location.create({
+      const newLocation = await prisma.location.create({
         data: {
           pointId: +args.pointId,
           name: args.name,
@@ -86,6 +96,13 @@ export const resolvers = {
           image: args.image,
         },
       });
+      const point = await prisma.point.findFirst({
+        where: { id: newLocation?.pointId },
+      });
+      return {
+        ...newLocation,
+        point
+      }
     },
     updateLocation: async (parent: any, args: any) => {
       return prisma.location.update({
