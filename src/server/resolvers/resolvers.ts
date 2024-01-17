@@ -1,15 +1,32 @@
 import { prisma } from "../data/database.js";
 
+type point = {
+  id: string;
+  lat: string;
+  lng: string;
+};
+
+type location = {
+  id: string;
+  point: point;
+  name: string;
+  description: string;
+  url: string;
+  image: string;
+};
+
 export const resolvers = {
-  Point: {
+  point: {
     id: (parent: any): string => parent.id,
     lat: (parent: any): string => parent.lat,
     lng: (parent: any): string => parent.lng,
+    location: (parent: any): location[] => parent.locations,
   },
 
-  Location: {
+  location: {
     id: (parent: any): string => parent.id,
-    point: (parent: any): string => parent.point,
+    point: (parent: any): point => parent.point,
+    pointId: (parent: any): string => parent.pointId,
     name: (parent: any): string => parent.name,
     description: (parent: any): string => parent.description,
     url: (parent: any): string => parent.url,
@@ -20,39 +37,29 @@ export const resolvers = {
     allPoints: async () => {
       return prisma.point.findMany({
         take: 200,
+        include: { location: true },
       });
     },
     point: async (parent: any, args: any) => {
       return prisma.point.findFirst({
         where: { id: +args.id },
+        include: { location: true },
       });
     },
     /*
      * Look up and map the point data onto the location response, instead of only returning the point id
      */
     allLocations: async () => {
-      const locations = await prisma.location.findMany({
+      return prisma.location.findMany({
         take: 200,
+        include: { point: { include: { location: true } } },
       });
-      const points = await prisma.point.findMany({
-        take: 200,
-      });
-      return locations.map(loc => ({
-          ...loc,
-          point: points.find(p => p.id === loc.pointId),
-        }));
     },
     location: async (parent: any, args: any) => {
-      const location = await prisma.location.findFirst({
+      return prisma.location.findFirst({
         where: { id: +args.id },
+        include: { point: { include: { location: true } } },
       });
-      const point = await prisma.point.findFirst({
-        where: { id: location?.pointId },
-      });
-      return {
-        ...location,
-        point,
-      };
     },
   },
 
@@ -87,7 +94,7 @@ export const resolvers = {
         id: string | number;
       }
     ) => {
-      const newLocation = await prisma.location.create({
+      return prisma.location.create({
         data: {
           pointId: +args.pointId,
           name: args.name,
@@ -95,14 +102,8 @@ export const resolvers = {
           url: args.url,
           image: args.image,
         },
+        include: { point: { include: { location: true } } },
       });
-      const point = await prisma.point.findFirst({
-        where: { id: newLocation?.pointId },
-      });
-      return {
-        ...newLocation,
-        point
-      }
     },
     updateLocation: async (parent: any, args: any) => {
       return prisma.location.update({
@@ -110,13 +111,16 @@ export const resolvers = {
           id: +args.id,
         },
         data: {
-          pointId: args.pointId,
+          pointId: +args.pointId,
           name: args.name,
           description: args.description,
           url: args.url,
           image: args.image,
         },
+        include: { point: { include: { location: true } } },
       });
     },
   },
 };
+
+// TODO: makeExecutableSchema

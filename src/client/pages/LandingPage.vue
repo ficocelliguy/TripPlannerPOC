@@ -7,7 +7,7 @@
 <script>
 import "leaflet/dist/leaflet.css";
 import { mountMap } from "../util/map";
-import { getAllLocations } from "../util/waypointData.js";
+import { getAllLocations } from "../util/waypointData";
 
 export default {
   data() {

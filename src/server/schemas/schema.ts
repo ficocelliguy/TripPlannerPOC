@@ -1,14 +1,16 @@
 import { gql } from "apollo-server";
 
 export const typeDefs = gql`
-  type Point {
+  type point {
     id: ID!
     lat: String!
     lng: String!
+    location: [location]
   }
-  type Location {
+  type location {
     id: ID!
-    point: Point!
+    point: point
+    pointId: String!
     name: String
     description: String
     url: String
@@ -16,22 +18,22 @@ export const typeDefs = gql`
   }
 
   type Query {
-    allPoints: [Point!]!
-    point(id: ID!): Point
-    allLocations: [Location!]!
-    location(id: ID!): Location
+    allPoints: [point!]!
+    point(id: ID!): point
+    allLocations: [location!]!
+    location(id: ID!): location
   }
 
   type Mutation {
-    registerPoint(lat: String!, lng: String!): Point!
-    updatePoint(id: ID!, lat: String!, lng: String!): Point!
+    registerPoint(lat: String!, lng: String!): point!
+    updatePoint(id: ID!, lat: String!, lng: String!): point!
     registerLocation(
       pointId: String!
       name: String
       description: String
       url: String
       image: String
-    ): Location!
+    ): location!
     updateLocation(
       id: ID!
       pointId: String
@@ -39,6 +41,6 @@ export const typeDefs = gql`
       description: String
       url: String
       image: String
-    ): Location!
+    ): location!
   }
 `;

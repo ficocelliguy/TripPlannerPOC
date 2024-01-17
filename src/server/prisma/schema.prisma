@@ -11,7 +11,7 @@ model point {
   id       Int        @id @unique @default(autoincrement())
   lat      String
   lng      String
-  Location location[]
+  location location[]
 }
 
 model location {
