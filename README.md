@@ -39,15 +39,15 @@ prisma-update-db
 
 To start the server run
 ```
-npm run start-backend
+npm run serve
 ```
 
-You can test the server locally by navigating to [https://studio.apollographql.com/sandbox/explorer](https://studio.apollographql.com/sandbox/explorer) 
+You can test the server by navigating to [https://studio.apollographql.com/sandbox/explorer](https://studio.apollographql.com/sandbox/explorer). Connect it to the server address logged by `npm run serve`, usually `http://localhost:9090/`.
 
 
 To start the client run
 ```
-npm run start-frontend
+npm run dev
 ```
 You can visit the client locally at [http://127.0.0.1:5173/](http://127.0.0.1:5173/)
 

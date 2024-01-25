@@ -1,7 +1,8 @@
 import { APOLLO_URL } from "../config/config";
-import { gql } from "apollo-server";
+import { gql } from "graphql-tag";
+import { DocumentNode, print } from "graphql";
 
-export function runQuery(query: string) {
+export function runQuery(query: DocumentNode) {
   let resolve: (s: string) => void, reject: (s: string) => void;
   const result = new Promise((res, rej) => {
     resolve = res;
@@ -12,7 +13,7 @@ export function runQuery(query: string) {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      query,
+      query: print(query),
     }),
   })
     .then(async (res) => await res.json())
@@ -57,15 +58,9 @@ const allLocations = gql`
 `;
 
 export function getAllPoints() {
-  return runQuery(`
-          query {
-            ${allPoints}
-          }`);
+  return runQuery(allPoints);
 }
 
 export function getAllLocations() {
-  return runQuery(`
-          query {
-            ${allLocations}
-          }`);
+  return runQuery(allLocations);
 }
