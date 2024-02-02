@@ -7,6 +7,7 @@ import App from "./pages/App.vue";
 import LandingPage from "./pages/LandingPage.vue";
 import AboutPage from "./pages/AboutPage.vue";
 import "./styles/main.css";
+import EditLocations from "./pages/EditLocations.vue";
 
 const cache = new InMemoryCache();
 
@@ -31,6 +32,11 @@ const routes = [
     path: "/about",
     name: "about",
     component: AboutPage,
+  },
+  {
+    path: "/locations",
+    name: "locations",
+    component: EditLocations,
   },
 ];
 const router = createRouter({

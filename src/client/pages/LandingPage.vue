@@ -5,8 +5,8 @@
 
 <script>
 import "leaflet/dist/leaflet.css";
-import { mountMap } from "../util/map";
-import { LocationData } from "../util/locationDataMixin.js";
+import { mountMap } from "../leaflet/map";
+import { LocationData } from "../data/locationDataMixin.js";
 
 export default {
   mixins: [LocationData],

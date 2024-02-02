@@ -1,6 +1,6 @@
 <template>
   <div
-    class="bg-gradient-to-tr from-slate-900 to-slate-600 h-screen text-white"
+    class="bg-gradient-to-tr from-slate-900 to-slate-600 min-h-screen text-white"
     @click="closeNav"
   >
     <HeaderBar></HeaderBar>

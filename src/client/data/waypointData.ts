@@ -1,7 +1,10 @@
 import { APOLLO_URL } from "../config/config";
-import { gql } from "graphql-tag";
 import { DocumentNode, print } from "graphql";
+import { AllLocations, AllPoints } from "./queries";
 
+/*
+ * Use fetch API to run graphql queries or mutations
+ */
 export function runQuery(query: DocumentNode) {
   let resolve: (s: string) => void, reject: (s: string) => void;
   const result = new Promise((res, rej) => {
@@ -30,37 +33,10 @@ export function runQuery(query: DocumentNode) {
   return result;
 }
 
-const allPoints = gql`
-  query {
-    allPoints {
-      id
-      lat
-      lng
-    }
-  }
-`;
-
-const allLocations = gql`
-  query {
-    allLocations {
-      id
-      point {
-        id
-        lat
-        lng
-      }
-      name
-      description
-      url
-      image
-    }
-  }
-`;
-
 export function getAllPoints() {
-  return runQuery(allPoints);
+  return runQuery(AllPoints);
 }
 
 export function getAllLocations() {
-  return runQuery(allLocations);
+  return runQuery(AllLocations);
 }

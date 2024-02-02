@@ -14,11 +14,17 @@
           >About This App</RouterLink
         >
       </div>
+      <div>
+        <RouterLink class="button" :to="{ name: 'locations' }"
+          >Edit Location Data</RouterLink
+        >
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+// TODO: close drawer if current location is chosen
 export default {
   props: {
     open: {
