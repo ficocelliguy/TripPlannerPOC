@@ -1,23 +1,24 @@
 <template>
   <h1 class="text-3xl font-bold underline">Hello world!</h1>
-  <div>{{ dataString }}</div>
   <div id="map"></div>
 </template>
 
 <script>
 import "leaflet/dist/leaflet.css";
 import { mountMap } from "../util/map";
-import { getAllLocations } from "../util/waypointData";
+import { LocationData } from "../util/locationDataMixin.js";
 
 export default {
+  mixins: [LocationData],
   data() {
     return {
-      dataString: "",
       map: "",
+      locations: null,
     };
   },
   async mounted() {
-    this.dataString = await getAllLocations();
+    this.locations = await this.getAllLocations();
+    console.log(this.locations);
 
     this.map = mountMap();
   },
