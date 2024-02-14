@@ -7,21 +7,27 @@
       <div v-if="loading" class="loading apollo">Loading...</div>
 
       <!-- Error -->
-      <div v-else-if="error" class="error apollo">An error occurred</div>
+      <div v-else-if="error" class="error apollo">An error occurred.</div>
 
       <!-- Result -->
       <div v-else-if="data" class="result apollo">
         <div
           v-for="location in data.allLocations"
           :key="location.id"
-          class="p-3"
+          class="p-3 w-4/5 max-w-2xl"
         >
-          <div>Name: {{ location.name }}</div>
-          <div>Description: {{ location.description }}</div>
-          <div>Url: {{ location.url }}</div>
-          <div>Image: {{ location.image }}</div>
-          <div>Lat: {{ location.point.lat }}</div>
-          <div>Lng: {{ location.point.lng }}</div>
+          <div v-if="editing === location.id" class="table w-full">
+            <EditData :location="location" @close="() => (editing = '')" />
+          </div>
+          <div v-else>
+            <div>Name: {{ location.name }}</div>
+            <div>Description: {{ location.description }}</div>
+            <div>Url: {{ location.url }}</div>
+            <div>Image: {{ location.image }}</div>
+            <div>Lat: {{ location.point.lat }}</div>
+            <div>Lng: {{ location.point.lng }}</div>
+            <button @click="() => (editing = location.id)">Edit</button>
+          </div>
         </div>
       </div>
 
@@ -33,15 +39,17 @@
 
 <script>
 import { AllLocations } from "../data/queries.js";
-import { LocationData } from "../data/locationDataMixin.js";
+import EditData from "../components/EditData.vue";
 
 export default {
-  mixins: [LocationData],
+  components: { EditData },
   data: function () {
     return {
       locations: null,
+      editing: null,
     };
   },
+  watch: {},
   methods: {
     AllLocations() {
       return AllLocations;
