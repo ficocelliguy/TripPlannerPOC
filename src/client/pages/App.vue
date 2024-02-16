@@ -1,7 +1,6 @@
 <template>
   <div
     class="bg-gradient-to-tr from-slate-900 to-slate-600 min-h-screen text-white"
-    @click="closeNav"
   >
     <HeaderBar></HeaderBar>
     <div>
@@ -20,9 +19,6 @@ export default {
     return {
       dataString: "",
     };
-  },
-  mounted() {
-    console.log(this.$route);
   },
 };
 </script>

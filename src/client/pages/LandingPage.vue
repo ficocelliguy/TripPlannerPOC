@@ -1,26 +1,12 @@
 <template>
   <h1 class="text-3xl font-bold underline">Hello world!</h1>
-  <div id="map"></div>
+  <MapWrapper />
 </template>
 
 <script>
-import "leaflet/dist/leaflet.css";
-import { mountMap } from "../leaflet/map";
-import { LocationData } from "../data/locationDataMixin.js";
+import MapWrapper from "../components/MapWrapper.vue";
 
 export default {
-  mixins: [LocationData],
-  data() {
-    return {
-      map: "",
-      locations: null,
-    };
-  },
-  async mounted() {
-    this.locations = await this.getAllLocations();
-    console.log(this.locations);
-
-    this.map = mountMap();
-  },
+  components: { MapWrapper },
 };
 </script>

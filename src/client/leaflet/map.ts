@@ -3,8 +3,8 @@ import L from "leaflet";
 
 export function mountMap() {
   const map = L.map("map", {
-    center: L.latLng(49.2125578, 16.62662018),
-    zoom: 14,
+    center: L.latLng(35.644294, 139.637861),
+    zoom: 12,
   });
 
   const Thunderforest_OpenCycleMap = L.tileLayer(THUNDERFOREST_URL, {

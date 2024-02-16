@@ -1,17 +1,21 @@
-import { AllLocations, AllPoints } from "./queries.js";
-import { UpdateLocation } from "./mutations.js";
+import { AllLocations, AllPoints } from "./queries.ts";
+import { RegisterPoint, UpdateLocation } from "./mutations.ts";
 
 export const LocationData = {
   methods: {
     async getAllLocations() {
-      await this.$apollo.query({
+      const response = await this.$apollo.query({
         query: AllLocations,
+        fetchPolicy: "no-cache",
       });
+      return response.data.allLocations;
     },
     async getAllPoints() {
-      await this.$apollo.query({
+      const response = await this.$apollo.query({
         query: AllPoints,
+        fetchPolicy: "no-cache",
       });
+      return response.data.allPoints;
     },
     async updateLocation(
       updateLocationId,
@@ -21,7 +25,7 @@ export const LocationData = {
       url,
       image
     ) {
-      await this.$apollo.mutate({
+      return this.$apollo.mutate({
         mutation: UpdateLocation,
         variables: {
           updateLocationId,
@@ -30,6 +34,15 @@ export const LocationData = {
           description,
           url,
           image,
+        },
+      });
+    },
+    async registerPoint(lat, lng) {
+      return this.$apollo.mutate({
+        mutation: RegisterPoint,
+        variables: {
+          lat: `${lat}`,
+          lng: `${lng}`,
         },
       });
     },

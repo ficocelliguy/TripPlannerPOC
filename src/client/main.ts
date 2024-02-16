@@ -7,7 +7,7 @@ import App from "./pages/App.vue";
 import LandingPage from "./pages/LandingPage.vue";
 import AboutPage from "./pages/AboutPage.vue";
 import "./styles/main.css";
-import EditLocations from "./pages/EditLocations.vue";
+import EditLocations from "./pages/LocationData.vue";
 
 const cache = new InMemoryCache();
 

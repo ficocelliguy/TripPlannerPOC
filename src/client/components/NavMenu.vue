@@ -2,7 +2,7 @@
   <div>
     <div
       data-test-id="menu-flyout"
-      class="h-screen fixed bg-emerald-900 md:w-96 w-full duration-300 z-10"
+      class="h-screen fixed bg-emerald-900 md:w-96 w-full duration-300 z-[1500]"
       :class="{ 'left-0': open, 'md:-left-1/2 -left-full': !open }"
     >
       <h1 class="">Nav Menu</h1>

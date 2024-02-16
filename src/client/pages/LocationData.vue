@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import { AllLocations } from "../data/queries.js";
+import { AllLocations } from "../data/queries.ts";
 import EditData from "../components/EditData.vue";
 
 export default {
