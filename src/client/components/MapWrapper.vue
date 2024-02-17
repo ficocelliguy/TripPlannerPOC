@@ -1,14 +1,24 @@
 <template>
   <div>
     <div id="map"></div>
-    <div v-if="selectedPoint">{{ selectedPoint }}</div>
-    <button
-      v-if="selectedPoint"
-      class="inline-block rounded p-2 m-2 bg-teal-800 white w-40"
-      @click="addPoint"
-    >
-      Add Point
-    </button>
+    <div v-if="selectedLatLng">
+      <div>{{ selectedLatLng }}</div>
+      <button
+        class="inline-block rounded p-2 m-2 bg-teal-800 white w-40"
+        @click="addPoint"
+      >
+        Add Point
+      </button>
+    </div>
+    <div v-if="selectedPoint">
+      <div>{{ toRaw(selectedPoint._latlng) }}</div>
+      <button
+        class="inline-block rounded p-2 m-2 bg-teal-800 white w-40"
+        @click="() => console.log('todo')"
+      >
+        Add Location Data
+      </button>
+    </div>
   </div>
 </template>
 
@@ -26,6 +36,7 @@ export default {
       map: "",
       allPoints: null,
       mapPointList: [],
+      selectedLatLng: null,
       selectedPoint: null,
     };
   },
@@ -36,6 +47,7 @@ export default {
     await this.updateLocations();
   },
   methods: {
+    toRaw,
     setupMapClick() {
       const popup = L.popup();
 
@@ -44,7 +56,8 @@ export default {
           .setLatLng(e.latlng)
           .setContent("You clicked the map at " + e.latlng.toString());
         this.map.openPopup(popup);
-        this.selectedPoint = { ...e.latlng };
+        this.selectedLatLng = { ...e.latlng };
+        this.selectedPoint = null;
       };
 
       this.map.on("click", onMapClick);
@@ -56,16 +69,23 @@ export default {
       this.mapPointList.forEach((point) => this.map.removeLayer(point));
       this.mapPointList = this.allPoints.map((point) => {
         const marker = L.marker([point.lat, point.lng]).addTo(this.map);
-        marker.on("click", (e) => console.log(e, marker));
+        marker.on("click", () => this.selectPoint(marker));
         return marker;
       });
       this.mapPointList.forEach((point) => this.map.addLayer(toRaw(point)));
       this.map.closePopup();
     },
     async addPoint() {
-      console.log("Point to be added: ", this.selectedPoint);
-      await this.registerPoint(this.selectedPoint.lat, this.selectedPoint.lng);
+      await this.registerPoint(
+        this.selectedLatLng.lat,
+        this.selectedLatLng.lng
+      );
       await this.updateLocations();
+    },
+    selectPoint(marker) {
+      this.selectedPoint = marker;
+      this.selectedLatLng = null;
+      this.$forceUpdate();
     },
   },
 };

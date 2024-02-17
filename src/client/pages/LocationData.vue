@@ -20,13 +20,13 @@
             <EditData :location="location" @close="() => (editing = '')" />
           </div>
           <div v-else>
-            <div>Name: {{ location.name }}</div>
-            <div>Description: {{ location.description }}</div>
-            <div>Url: {{ location.url }}</div>
-            <div>Image: {{ location.image }}</div>
-            <div>Lat: {{ location.point.lat }}</div>
-            <div>Lng: {{ location.point.lng }}</div>
-            <button @click="() => (editing = location.id)">Edit</button>
+            <DisplayData :location="location" />
+            <button
+              class="inline-block rounded p-2 m-2 bg-teal-800 white w-40"
+              @click="() => (editing = location.id)"
+            >
+              Edit
+            </button>
           </div>
         </div>
       </div>
@@ -40,9 +40,10 @@
 <script>
 import { AllLocations } from "../data/queries.ts";
 import EditData from "../components/EditData.vue";
+import DisplayData from "../components/DisplayData.vue";
 
 export default {
-  components: { EditData },
+  components: { DisplayData, EditData },
   data: function () {
     return {
       locations: null,

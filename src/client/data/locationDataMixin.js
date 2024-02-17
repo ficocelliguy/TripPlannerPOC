@@ -1,5 +1,9 @@
 import { AllLocations, AllPoints } from "./queries.ts";
-import { RegisterPoint, UpdateLocation } from "./mutations.ts";
+import {
+  RegisterLocation,
+  RegisterPoint,
+  UpdateLocation,
+} from "./mutations.ts";
 
 export const LocationData = {
   methods: {
@@ -29,6 +33,18 @@ export const LocationData = {
         mutation: UpdateLocation,
         variables: {
           updateLocationId,
+          pointId,
+          name,
+          description,
+          url,
+          image,
+        },
+      });
+    },
+    async registerLocation(pointId, name, description, url, image) {
+      return this.$apollo.mutate({
+        mutation: RegisterLocation,
+        variables: {
           pointId,
           name,
           description,
